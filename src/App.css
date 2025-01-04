@@ -1,0 +1,34 @@
+.game-container div{
+    width: 100px;
+    height: 100px;
+    margin: 10px;
+    border: 5px solid black;
+    border-radius: 15px;
+}
+.green{
+    background-color: green;
+}
+.red{
+    background-color: red;
+}
+.yellow{
+    background-color: yellow;
+}
+.blue{
+    background-color: blue;
+}
+
+.pressed {
+    background: radial-gradient(circle, white 30%, lightgray 80%);
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 70px rgba(255, 255, 255, 0.5);
+    transform: scale(1.03);
+    transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
+}
+
+
+.game-container .error {
+    background: #EF9A9A;
+    border-color: white;
+    box-shadow: 0 4px 15px white;
+}
+
