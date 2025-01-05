@@ -1,30 +1,82 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+body{
+    font-family: "Press Start 2P", sans-serif;
+    background: linear-gradient(135deg, #f7e8a4, #ffdea0);
+}
+
+.game-container{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.game-container .high-score{
+    margin-bottom: 50px;
+    visibility: visible;
+}
+.game-container h1{
+    font-size: 1.7rem;
+    font-weight: bolder;
+}
+
 .game-container div{
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
     margin: 10px;
     border: 5px solid black;
     border-radius: 15px;
 }
-.green{
-    background-color: green;
+
+.game-container button{
+    margin-bottom: 30px;
+    background: linear-gradient(135deg, #4169E1, #9B59B6);
+    color: white;
+    font-family: "Press Start 2P", sans-serif;
+    font-size: 15px;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.1s ease;
 }
-.red{
-    background-color: red;
-}
-.yellow{
-    background-color: yellow;
-}
-.blue{
-    background-color: blue;
+.game-container button:hover{
+    background: linear-gradient(135deg, #5A9BF6, #B084D7);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+    transform: scale(1.02);
 }
 
-.pressed {
+
+.green{
+    background-color: #50C878;
+}
+.red{
+    background-color: #FF4C4C;
+}
+.yellow{
+    background-color: #FFD700;
+}
+.blue{
+    background-color: #00BFFF;
+}
+
+.game-container .chosenBtn {
     background: radial-gradient(circle, white 30%, lightgray 80%);
     box-shadow: 0 0 40px rgba(255, 255, 255, 0.8), 0 0 70px rgba(255, 255, 255, 0.5);
     transform: scale(1.03);
     transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.1s ease;
 }
 
+.game-container .clicked {
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 30%, rgba(0, 0, 0, 0.3) 80%);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7), inset 0 0 10px rgba(0, 0, 0, 0.5);
+    transform: scale(0.95);
+    transition: all 0.15s ease-in-out;
+}
 
 .game-container .error {
     background: #EF9A9A;
