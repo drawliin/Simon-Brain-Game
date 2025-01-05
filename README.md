@@ -58,11 +58,6 @@ Make sure you have the following installed:
     yarn dev
 4. Open your browser and navigate to http://localhost:3000 to play the game.
 
-## Screenshots
-
-- **Game UI showing level progression**
-- **Game Over screen with a prompt to restart**
-
 ## Contributing
 
 Contributions are welcome! Follow these steps to contribute:
@@ -72,10 +67,6 @@ Contributions are welcome! Follow these steps to contribute:
 3. Commit your changes: `git commit -m "Add some feature"`.
 4. Push to the branch: `git push origin feature-name`.
 5. Submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
 
 ## Keywords
 
