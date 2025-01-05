@@ -53,9 +53,9 @@ Make sure you have the following installed:
 3. Start the development server:
    
    ```bash
-    npm start
+    npm run dev
     # or
-    yarn start
+    yarn dev
 4. Open your browser and navigate to http://localhost:3000 to play the game.
 
 ## Screenshots
