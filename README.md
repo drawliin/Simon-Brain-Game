@@ -43,7 +43,7 @@ Make sure you have the following installed:
 
    ```bash
    git clone https://github.com/drawliin/Simon-Brain-Game.git
-   cd simon-game-clone
+   cd Simon-Brain-Game
 2. Install dependencies:
 
    ```bash
