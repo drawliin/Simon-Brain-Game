@@ -19,13 +19,24 @@ function App() {
         }
     }, [userPattern])
 
+    useEffect(() => {
+        const score = localStorage.getItem('score')
+        if(score){
+            setHighScore(score);
+        }
+    }, [])
+
     function nextLevel(){
         const randomChosenColor = buttonColors[Math.floor(Math.random()*4)];
         setGamePattern((prev) => [...prev, randomChosenColor]);
         setUserPattern({ list: [], button: '' });
         animateButton(randomChosenColor);
-        setLevel(prev => prev + 1);
-        setTitle(`Level ${level+1}`);
+        setLevel(prev => {
+            const newLevel = prev + 1;
+            setTitle(`Level ${newLevel}`);
+            return newLevel;
+        }); 
+        
     }
 
     function checkAnswer(){
@@ -38,13 +49,14 @@ function App() {
         }else{
             if(level > highScore){
                 setHighScore(level);
+                localStorage.setItem('score', level)
                 
             }
             btnError(userPattern.button);
             playSound('error');
             setGamePattern([]);
             setUserPattern({list: [], button: ''});
-            setTitle('Press Go to start');
+            setTitle('Press Go! to Start');
             setLevel(0);
             setStart(false);
         }
@@ -55,7 +67,7 @@ function App() {
         div.classList.add('chosenBtn');
         setTimeout(() => {
             div.classList.remove('chosenBtn')
-        }, 300)
+        }, 200)
     }
 
     function animateClickedButton(color){
@@ -63,15 +75,15 @@ function App() {
         div.classList.add('clicked');
         setTimeout(() => {
             div.classList.remove('clicked')
-        }, 150)
+        }, 100)
     }
 
-    function btnError(e){
-        e.target.classList.add('error');
+    function btnError(arg){
+        arg.classList.add('error');
         document.body.style.background = '#E57373';
 
         setTimeout(() => {
-            e.target.classList.remove('error');
+            arg.classList.remove('error');
             document.body.style.background = 'linear-gradient(135deg, #f7e8a4, #ffdea0)';;
 
         }, 150)
@@ -88,7 +100,7 @@ function App() {
         if(start){
             setUserPattern({
                 list: [...userPattern.list, color],
-                button: e
+                button: e.currentTarget
             });
             animateClickedButton(color);
             playSound('click');
@@ -96,21 +108,27 @@ function App() {
     }
 
     function playSound(sound){
-        const soundPath = sound === 'click' ? '../public/sounds/click.ogg' : '../public/sounds/error.ogg';
+        const soundPath = sound === 'click' ? '/sounds/click.ogg' : '/sounds/error.ogg';
         const audio = new Audio(soundPath);
         audio.play();
     }
 
     return (
-        <div className='game-container'>
+
+        <div className="game-container">
             <h1 className='high-score'>High Score: {highScore}</h1>
             <h1>{title}</h1>
             <button onClick={startBtn}>Go</button>
-            <div onClick={(e) => handleGame(e, 'green')} className='green'></div>
-            <div onClick={(e) => handleGame(e, 'red')} className='red'></div>
-            <div onClick={(e) => handleGame(e, 'yellow')} className='yellow'></div>
-            <div onClick={(e) => handleGame(e, 'blue')} className='blue'></div>
-
+            {buttonColors.map((color) => {
+                return(
+                    <div
+                        key={color}
+                        onClick={(e) => handleGame(e, color)}
+                        className={color}
+                    >
+                    </div>
+                )
+            })}
         </div>
     )
 }
