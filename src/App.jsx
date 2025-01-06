@@ -56,7 +56,7 @@ function App() {
             playSound('error');
             setGamePattern([]);
             setUserPattern({list: [], button: ''});
-            setTitle('Press Go! to Start');
+            setTitle('Game Over! Press Go To Play Again');
             setLevel(0);
             setStart(false);
         }
