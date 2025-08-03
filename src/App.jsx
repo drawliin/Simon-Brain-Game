@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import {useState, useEffect} from 'react'
 import './App.css'
 
 function App() {
@@ -25,6 +25,15 @@ function App() {
             setHighScore(score);
         }
     }, [])
+
+    useEffect(() => {
+        const btn = document.getElementsByTagName('button')[0];
+        if(start){
+            btn.classList.add('btnClicked');
+        }else{
+            btn.classList.remove('btnClicked');
+        }
+    }, [start])
 
     function nextLevel(){
         const randomChosenColor = buttonColors[Math.floor(Math.random()*4)];
@@ -96,6 +105,7 @@ function App() {
         }
     }
 
+
     function handleGame(e, color){
         if(start){
             setUserPattern({
@@ -117,7 +127,7 @@ function App() {
 
         <div className="game-container">
             <h1 className='high-score'>High Score: {highScore}</h1>
-            <h1>{title}</h1>
+            <h3>{title}</h3>
             <button onClick={startBtn}>Go</button>
             {buttonColors.map((color) => {
                 return(
