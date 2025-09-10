@@ -1,77 +1,77 @@
-import {useState, useEffect} from 'react'
+import { useState, useEffect } from 'react'
 import './App.css'
 
 function App() {
 
     const [start, setStart] = useState(false);
-    const [title, setTitle] = useState('Press Go! to Start');
+    const [title, setTitle] = useState(['Press Go! to Start']);
     const [level, setLevel] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [gamePattern, setGamePattern] = useState([]);
-    const [userPattern, setUserPattern] = useState({list: [], button: ''});
+    const [userPattern, setUserPattern] = useState({ list: [], button: '' });
 
     const buttonColors = ['green', 'red', 'yellow', 'blue'];
-    
+
 
     useEffect(() => {
-        if(userPattern.list.length > 0){
+        if (userPattern.list.length > 0) {
             checkAnswer();
         }
     }, [userPattern])
 
     useEffect(() => {
         const score = localStorage.getItem('score')
-        if(score){
+        if (score) {
             setHighScore(score);
         }
     }, [])
 
     useEffect(() => {
         const btn = document.getElementsByTagName('button')[0];
-        if(start){
+        if (start) {
             btn.classList.add('btnClicked');
-        }else{
+        } else {
             btn.classList.remove('btnClicked');
         }
     }, [start])
 
-    function nextLevel(){
-        const randomChosenColor = buttonColors[Math.floor(Math.random()*4)];
+    function nextLevel() {
+        const randomChosenColor = buttonColors[Math.floor(Math.random() * 4)];
         setGamePattern((prev) => [...prev, randomChosenColor]);
         setUserPattern({ list: [], button: '' });
         animateButton(randomChosenColor);
         setLevel(prev => {
             const newLevel = prev + 1;
-            setTitle(`Level ${newLevel}`);
+            setTitle([`Level ${newLevel}`]);
             return newLevel;
-        }); 
-        
+        });
+
     }
 
-    function checkAnswer(){
+    function checkAnswer() {
         const checkGamePattern = gamePattern.slice(0, userPattern.list.length);
-        if(userPattern.list.join(',') === checkGamePattern.join(',')){
-            if(userPattern.list.length == gamePattern.length){
-                setTimeout(() => {nextLevel()} ,500)
+        if (userPattern.list.join(',') === checkGamePattern.join(',')) {
+            if (userPattern.list.length == gamePattern.length) {
+                setTimeout(() => { nextLevel() }, 500)
             }
-            
-        }else{
-            if(level > highScore){
+
+        } else {
+            if (level > highScore) {
                 setHighScore(level);
                 localStorage.setItem('score', level)
-                
+
             }
             btnError(userPattern.button);
             playSound('error');
             setGamePattern([]);
-            setUserPattern({list: [], button: ''});
-            setTitle('Game Over! Press Go To Play Again');
+            setUserPattern({ list: [], button: '' });
+            setTitle(['Game Over!', 'Press "Go" To Play Again']);
             setLevel(0);
             setStart(false);
         }
     }
 
-    function animateButton(color){
+    function animateButton(color) {
         const div = document.getElementsByClassName(color)[0];
         div.classList.add('chosenBtn');
         setTimeout(() => {
@@ -79,7 +79,7 @@ function App() {
         }, 200)
     }
 
-    function animateClickedButton(color){
+    function animateClickedButton(color) {
         const div = document.getElementsByClassName(color)[0];
         div.classList.add('clicked');
         setTimeout(() => {
@@ -87,7 +87,7 @@ function App() {
         }, 100)
     }
 
-    function btnError(arg){
+    function btnError(arg) {
         arg.classList.add('error');
         document.body.style.background = '#E57373';
 
@@ -98,16 +98,16 @@ function App() {
         }, 150)
     }
 
-    function startBtn(){
-        if(!start){
+    function startBtn() {
+        if (!start) {
             setStart(true);
             nextLevel();
         }
     }
 
 
-    function handleGame(e, color){
-        if(start){
+    function handleGame(e, color) {
+        if (start) {
             setUserPattern({
                 list: [...userPattern.list, color],
                 button: e.currentTarget
@@ -117,7 +117,7 @@ function App() {
         }
     }
 
-    function playSound(sound){
+    function playSound(sound) {
         const soundPath = sound === 'click' ? '/sounds/click.ogg' : '/sounds/error.ogg';
         const audio = new Audio(soundPath);
         audio.play();
@@ -126,11 +126,13 @@ function App() {
     return (
 
         <div className="game-container">
-            <h1 className='high-score'>High Score: {highScore}</h1>
-            <h3>{title}</h3>
+            <h1 className='high-score'><span>High Score:</span> <span>{highScore}</span></h1>
+            {title.map(t => (
+                <h3>{t}</h3>
+            ))}
             <button onClick={startBtn}>Go</button>
             {buttonColors.map((color) => {
-                return(
+                return (
                     <div
                         key={color}
                         onClick={(e) => handleGame(e, color)}

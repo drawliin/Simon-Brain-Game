@@ -8,6 +8,7 @@
 body{
     font-family: "Press Start 2P", sans-serif;
     background: linear-gradient(135deg, #f7e8a4, #ffdea0);
+    height: 100vh;
 }
 
 .game-container{
@@ -58,6 +59,7 @@ body{
 }
 .game-container .btnClicked{
     cursor: not-allowed;
+    visibility: hidden;
 }
 
 
@@ -92,4 +94,55 @@ body{
     background: #EF9A9A;
     border-color: white;
     box-shadow: 0 4px 15px white;
+}
+
+/* --- Responsive Styles --- */
+
+@media (max-width: 600px) {
+  .game-container h1 {
+    font-size: 1.3rem; /* Make the title slightly smaller */
+    padding: 0 15px; /* Add horizontal padding to prevent text from touching the edges */
+  }
+
+  .game-container .high-score {
+    margin-bottom: 30px; /* Reduce the top margin */
+  }
+
+  /* Reduce the size of the game buttons for a better fit */
+  .game-container div {
+    width: 95px;
+    height: 95px;
+    margin: 8px;
+    border-width: 4px;
+  }
+
+    .game-container h3 {
+    font-size: .7rem;
+  }
+
+  /* Adjust the main start/restart button */
+  .game-container button {
+    margin-top: 25px;
+    padding: 10px 22px;
+    font-size: 14px;
+  }
+}
+
+/* Further adjustments for very small screens */
+@media (max-width: 400px) {
+  .game-container h1 {
+    font-size: 1.1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  .game-container h3 {
+    font-size: .7rem;
+  }
+
+  .game-container div {
+    width: 80px;
+    height: 80px;
+    margin: 5px;
+  }
 }
